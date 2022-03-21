@@ -24,10 +24,8 @@ class DataSet:
     # Private methods
     def _get_from_local_file(self):
         logging.info("Reading local file %s", self.location)
-        if(self.location.split('.') == 'xlsx'):
-            return pd.read_excel(self.location, usecols=self.cols,engine='openpyxl',sheet_name=0)
-        else:
-            return pd.read_csv(self.location, usecols=self.cols)
+        return pd.read_excel(self.location, usecols=self.cols,engine='openpyxl',sheet_name=0)
+
 
     def _get_from_local_dir(self):
         return self._get_from_local_file()
