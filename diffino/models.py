@@ -2,7 +2,7 @@ from io import BytesIO
 import logging
 import boto3
 import pandas as pd
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 logging.basicConfig(format="%(asctime)s %(message)s", level=logging.INFO)
 
@@ -24,7 +24,10 @@ class DataSet:
     # Private methods
     def _get_from_local_file(self):
         logging.info("Reading local file %s", self.location)
-        return pd.read_csv(self.location, usecols=self.cols)
+        if(self.location.split('.') == 'xlsx'):
+            return pd.read_excel(self.location, usecols=self.cols,engine='openpyxl',sheet_name=0)
+        else:
+            return pd.read_csv(self.location, usecols=self.cols)
 
     def _get_from_local_dir(self):
         return self._get_from_local_file()

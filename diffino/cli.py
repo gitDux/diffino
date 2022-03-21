@@ -1,4 +1,4 @@
-from models import Diffino
+from .models import Diffino
 import argparse
 
 
